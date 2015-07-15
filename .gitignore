@@ -1,3 +1,7 @@
 # Created by .gitignore support plugin (hsz.mobi)
 pynagsystemd.iml
 .idea
+venv
+*.egg-info
+/build/
+/dist/
