@@ -21,8 +21,8 @@ setup(
         'Intended Audience :: System Administrators',
         'License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
-        #Programming Language :: Python :: 3 :: Only
         'Operating System :: POSIX :: Linux',
         'Topic :: System :: Networking :: Monitoring'
     ],
