@@ -6,19 +6,12 @@ of the License.
 
 Copyright Andrea Briganti a.k.a 'Kbyte'
 """
+import io
+import subprocess
 
 import nagiosplugin
-import subprocess
-import io
 
 
-# Python2 compatibility
-try:
-    FileNotFoundError
-except NameError:
-    FileNotFoundError = OSError
-    
-    
 class SystemdStatus(nagiosplugin.Resource):
     name = 'SYSTEMD'
 
@@ -30,7 +23,7 @@ class SystemdStatus(nagiosplugin.Resource):
                                  stdin=subprocess.PIPE,
                                  stdout=subprocess.PIPE)
             pres, err = p.communicate()
-        except FileNotFoundError as e:
+        except OSError as e:
             raise nagiosplugin.CheckError(e)
 
         if err:
