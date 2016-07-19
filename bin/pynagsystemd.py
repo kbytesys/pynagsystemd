@@ -12,6 +12,13 @@ import subprocess
 import io
 
 
+# Python2 compatibility
+try:
+    FileNotFoundError
+except NameError:
+    FileNotFoundError = OSError
+    
+    
 class SystemdStatus(nagiosplugin.Resource):
     name = 'SYSTEMD'
 
