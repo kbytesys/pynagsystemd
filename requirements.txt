@@ -1,0 +1,1 @@
+nagiosplugin>=1.2

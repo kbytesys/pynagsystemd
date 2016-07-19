@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='pynagsystemd',
     packages=find_packages(),
-    version='1.0.2',
+    version='1.0.3',
     scripts=['bin/pynagsystemd.py'],
     install_requires=[
         'nagiosplugin>=1.2',
@@ -12,7 +12,7 @@ setup(
     author='Andrea Briganti',
     author_email='kbytesys@gmail.com',
     url='https://github.com/kbytesys/pynagsystemd',
-    download_url='https://github.com/kbytesys/pynagsystemd/tarball/v1.0.2',
+    download_url='https://github.com/kbytesys/pynagsystemd/tarball/v1.0.3',
     keywords=['nagios', 'systemd'],
     license='GNU LGPL v2',
     classifiers=[
