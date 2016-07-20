@@ -1,4 +1,4 @@
-pynagsystemd
+pynagsystemd [![Build Status](https://travis-ci.org/kbytesys/pynagsystemd.svg?branch=master)](https://travis-ci.org/kbytesys/pynagsystemd)
 ============
 
 Simple and easy nagios check for systemd status.
