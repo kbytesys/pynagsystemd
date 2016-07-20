@@ -6,4 +6,4 @@ python:
 install:
 - python setup.py -q install
 script:
-- pynagsystemd.py
+- pynagsystemd.py | grep "SYSTEMD UNKNOWN"
