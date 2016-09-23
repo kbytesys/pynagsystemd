@@ -8,18 +8,9 @@ Copyright Andrea Briganti a.k.a 'Kbyte'
 """
 import io
 import subprocess
-from optparse import OptionParser
+import argparse
 
 import nagiosplugin
-
-
-parser = OptionParser()
-parser.add_option("-s", "--service", type="string", dest="service",
-                  help="Name of the Service that is beeing tested")
-
-global service
-(options, args) = parser.parse_args()
-service = str(options.service)
 
 
 class SystemdStatus(nagiosplugin.Resource):
@@ -92,13 +83,13 @@ class SystemdContext(nagiosplugin.Context):
 
 
 def main():
-    parser = OptionParser()
-    parser.add_option("-s", "--service", type="string", dest="service",
-                       help="Name of the Service that is beeing tested")
-
     global service
-    (options, args) = parser.parse_args()
-    service = str(options.service)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--service", type=str, dest="service", help="Name of the Service that is beeing tested")
+
+    args = parser.parse_args()
+    service = str(args.service)
 
     if service == "None":
         check = nagiosplugin.Check(
