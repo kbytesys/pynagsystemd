@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='pynagsystemd',
     packages=find_packages(),
-    version='1.0.4',
+    version='1.1.0',
     scripts=['bin/pynagsystemd.py'],
     install_requires=[
         'nagiosplugin>=1.2',

@@ -7,6 +7,7 @@ install:
 - python setup.py -q install
 script:
 - pynagsystemd.py | grep "SYSTEMD UNKNOWN"
+- pynagsystemd.py -s dummyser | grep "SYSTEMD UNKNOWN"
 deploy:
   provider: pypi
   user: kbyte
