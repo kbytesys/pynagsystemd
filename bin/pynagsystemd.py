@@ -3,7 +3,6 @@
 You can redistribute it and/or modify it under the terms of the GNU General
 Public License as published by the Free Software Foundation, either version 2
 of the License.
-
 Copyright Andrea Briganti a.k.a 'Kbyte'
 """
 import io
@@ -43,11 +42,14 @@ class SystemdStatus(nagiosplugin.Resource):
 class ServiceStatus(nagiosplugin.Resource):
     name = 'SYSTEMD'
 
+    def __init__(self, *args, **kwargs):
+        self.service = kwargs.pop('service')
+        super(nagiosplugin.Resource, self).__init__(*args, **kwargs)
+
     def probe(self):
         # Execute systemctl is-active and get output
-        global service
         try:
-            p = subprocess.Popen(['systemctl', 'is-active', service],
+            p = subprocess.Popen(['systemctl', 'is-active', self.service],
                                  stderr=subprocess.PIPE,
                                  stdin=subprocess.PIPE,
                                  stdout=subprocess.PIPE)
@@ -65,7 +67,7 @@ class ServiceStatus(nagiosplugin.Resource):
             if result == "active":
                 return [nagiosplugin.Metric('systemd', (True, None), context='systemd')]
             else:
-                return [nagiosplugin.Metric('systemd', (False, service), context='systemd')]
+                return [nagiosplugin.Metric('systemd', (False, self.service), context='systemd')]
 
         return [nagiosplugin.Metric('systemd', (False, "No Service given"), context='systemd')]
 
@@ -83,21 +85,18 @@ class SystemdContext(nagiosplugin.Context):
 
 
 def main():
-    global service
-
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--service", type=str, dest="service", help="Name of the Service that is beeing tested")
 
     args = parser.parse_args()
-    service = str(args.service)
 
-    if service == "None":
+    if args.service is None:
         check = nagiosplugin.Check(
             SystemdStatus(),
             SystemdContext())
     else:
         check = nagiosplugin.Check(
-            ServiceStatus(),
+            ServiceStatus(service=args.service),
             SystemdContext())
     check.main()
 
