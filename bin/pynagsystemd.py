@@ -22,15 +22,15 @@ class SystemdStatus(nagiosplugin.Resource):
                                  stderr=subprocess.PIPE,
                                  stdin=subprocess.PIPE,
                                  stdout=subprocess.PIPE)
-            pres, err = p.communicate()
+            stdout, stderr = p.communicate()
         except OSError as e:
             raise nagiosplugin.CheckError(e)
 
-        if err:
-            raise nagiosplugin.CheckError(err)
+        if stderr:
+            raise nagiosplugin.CheckError(stderr)
 
-        if pres:
-            for line in io.StringIO(pres.decode('utf-8')):
+        if stdout:
+            for line in io.StringIO(stdout.decode('utf-8')):
                 split_line = line.split()
                 unit = split_line[0]
                 active = split_line[2]
@@ -53,14 +53,14 @@ class ServiceStatus(nagiosplugin.Resource):
                                  stderr=subprocess.PIPE,
                                  stdin=subprocess.PIPE,
                                  stdout=subprocess.PIPE)
-            pres, err = p.communicate()
+            stdout, stderr = p.communicate()
         except OSError as e:
             raise nagiosplugin.CheckError(e)
 
-        if err:
-            raise nagiosplugin.CheckError(err)
-        if pres:
-            for line in io.StringIO(pres.decode('utf-8')):
+        if stderr:
+            raise nagiosplugin.CheckError(stderr)
+        if stdout:
+            for line in io.StringIO(stdout.decode('utf-8')):
                 yield nagiosplugin.Metric(self.service, line.strip(), context='systemd')
 
 
