@@ -3,6 +3,7 @@ python:
 - '2.7'
 - '3.4'
 - '3.5'
+- '3.6'
 install:
 - python setup.py -q install
 script:
@@ -10,6 +11,7 @@ script:
 - pynagsystemd.py -s dummyser | grep "SYSTEMD UNKNOWN"
 deploy:
   provider: pypi
+  skip_existing: true
   user: kbyte
   password:
     secure: dHN0LZODNW1ZSngiVD0ZSk2UkdeLTAfRD7bn+OYA65E0EUAb0DUD4MkUyAccf5YN7lO/pqPqLKH7rMsiDut+fX28swV3uuq7FdyjQdlzExvkzNYOGJxIHRV7QwFYnBOV9XkqEuny0BKFVzU1qmty4vk1bldHUTehmPhijT8f8oSt3ZjKlY4qk9epRD+ITgKa8FaCCjbh/O9ANzzYNuOhg/APyrZzn2puRJjN5Sf266mvmqhE3GxNcZix3jVkSDuBYJzBmVcavlzDfQ1q+O4iDCL4nzZTazlVnNj1Ia1+yey+O+B9dzIVEusdYxc0tC87+aSmLHYawU0/nOWzGz3bYU9bgtDFqs5v1wReMBZIcB7waw/KJ0k33JxESWA7udSiG/jcI/6fWlpfhryK9fGc7utjWbz4wY3SO8LY1XMdmoaLz0EinGfjGvxOzTDuypoIbVvvOX9xhZyC1xs7Eluec5/jAeX+MBnEglSVanme4F3uHaqwwoPrL9B9UV/MT/0PidN+BqfU5XC9RTQfTxrycya+ij2ePABAQyeZvKc19XGUUrnRuHfBQgvsvLf9RG4u8/g2pNclPmLqkVj9cNc2xEl9PYIvs6IIqbPoC6rbnYNrymsw3QrhWqa8CrjwEhi8OVzYZ88WBhA0ken/EICDMfGGB3U3Mo7lD1t9eEgfCYQ=
@@ -17,3 +19,4 @@ deploy:
     tags: true
     distributions: sdist bdist_wheel
     repo: kbytesys/pynagsystemd
+    python: '3.6
