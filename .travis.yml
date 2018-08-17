@@ -19,4 +19,4 @@ deploy:
     tags: true
     distributions: sdist bdist_wheel
     repo: kbytesys/pynagsystemd
-    python: '3.6
+    python: '3.6'
