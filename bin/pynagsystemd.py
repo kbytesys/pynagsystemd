@@ -8,6 +8,7 @@ Copyright Andrea Briganti a.k.a 'Kbyte'
 import io
 import subprocess
 import argparse
+import re
 
 import nagiosplugin
 
@@ -30,7 +31,11 @@ class SystemdStatus(nagiosplugin.Resource):
             raise nagiosplugin.CheckError(stderr)
 
         if stdout:
+            pattern = re.compile('^●\s*(?P<info>.+)')
             for line in io.StringIO(stdout.decode('utf-8')):
+                match = pattern.match(line)
+                if match:
+                  line = match.group('info')
                 split_line = line.split()
                 unit = split_line[0]
                 active = split_line[2]
